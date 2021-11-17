@@ -1,4 +1,5 @@
 /*Här skriver ni koden*/
+
 // declaration of variables
 const button = document.getElementById('my-button');
 const list = document.getElementById('list');
@@ -7,9 +8,12 @@ const input = document.getElementById('task');
 // declaration of click handlers
 const handelAdd = () => {
     const liElement = document.createElement('li');
+    liElement.classList.add('li-element');
     const taskText = document.createElement('span');
     const deleteButton = document.createElement('button');
+    deleteButton.classList.add('delete-button');
     const editButton = document.createElement('button');
+    editButton.classList.add('edit-button');
     const checkbox = document.createElement('input');
     const text = document.createTextNode(input.value);
 
@@ -17,45 +21,35 @@ const handelAdd = () => {
 
     editButton.innerHTML = "edit";
     const handelEdit = () => {
-
         taskText.contentEditable = true;
         taskText.style.backgroundColor = "#dddbdb";
-
     }
-
-    editButton.addEventListener("click", handelEdit);
-
     const saveEdit = (e) => {
         if(e.key === 'Enter') {
-        taskText.contentEditable = false;
-        taskText.style.backgroundColor = null;
+            taskText.contentEditable = false;
+            taskText.style.backgroundColor = null;
         }
-        
     }
-
-    taskText.addEventListener("keypress", saveEdit);
-
-    const handelCheckbox = () => {
-          
-        liElement.classList.toggle('style-task');
-
+    const handelCheck = () => {
+        taskText.classList.toggle('style-task');
     }
-    checkbox.addEventListener("click", handelCheckbox);
-
-    deleteButton.innerHTML = "delete";
     const handelDelete = () => {
         liElement.remove();
-        
-        // alternative
-        // list.removeChild(liElement);
     }
+
+    deleteButton.innerHTML = "delete";
+
+    taskText.addEventListener("keypress", saveEdit);
+    checkbox.addEventListener("click", handelCheck);
     deleteButton.addEventListener("click", handelDelete);
+    editButton.addEventListener("click", handelEdit);
+
     if (input.value == "") {
         alert('Write something here');
     } else {
+        liElement.appendChild(checkbox);
         taskText.appendChild(text);
         liElement.appendChild(taskText);
-        liElement.appendChild(checkbox);
         liElement.appendChild(deleteButton);
         liElement.appendChild(editButton);
         input.value = "";
@@ -63,8 +57,12 @@ const handelAdd = () => {
     }
 }
 
-// click event binding
 button.addEventListener("click", handelAdd);
+input.addEventListener("keyup", (event) => {
+    if(event.key === 'Enter') {
+        handelAdd()
+    }
+});
 
 
 
