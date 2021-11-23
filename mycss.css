@@ -11,6 +11,7 @@ h2 {
     font-family: arial;
 }
 
+
 .style-task {
     text-decoration : line-through;
 }
@@ -47,6 +48,10 @@ li {
     align-items: center;
 }
 
+li:hover button {
+    display: block;
+
+}
 .add-button {
     padding: 0 2px;
 }
@@ -73,16 +78,18 @@ span {
 }
 
 .delete-button {
+    display : none;
     color: #fff;
     background-color: #5bc0de;
     border-color: #46b8da;
 
 }
 
-.edit-button{
-color: #fff;
-background-color: #5bc0de;
-border-color: #46b8da;
+.edit-button {
+    display : none;
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
 
 }
 
